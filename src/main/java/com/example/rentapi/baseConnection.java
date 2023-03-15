@@ -42,4 +42,45 @@ public class baseConnection {
         }
         return rst;
     }
+
+    public ResultSet getSpecUser(String username)
+    {
+        ResultSet rst = null;
+        try
+        {
+            Statement stmt = conn.createStatement();
+
+            rst = stmt.executeQuery("SELECT * FROM getUserInfo3('"+username+"')");
+
+            if(rst.next())
+            {
+                return rst;
+            }
+        }
+        catch (Exception ex)
+        {
+            System.out.println(ex.getMessage());
+        }
+        return rst;
+    }
+
+    public int updateData(String old_username, String new_username, String new_firstname, String new_surname, String new_password)
+        {
+            int success = 0;
+            try
+            {
+                Statement stmt = conn.createStatement();
+
+                success = stmt.executeUpdate("SELECT updateData('"+old_username+"', '"+new_username+"', '"+new_password+"', '"+new_firstname+"', '"+new_surname+"');");
+                if(success > 0)
+                {
+                    return 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.out.println(ex.getMessage());
+            }
+            return 0;
+        }
 }
