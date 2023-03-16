@@ -1,4 +1,4 @@
-package com.example.rentapi;
+package com.example.rentapi._controllers;
 
 import java.io.Console;
 import java.sql.ResultSet;
@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.rentapi.baseConnection;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -45,13 +46,13 @@ public class userController {
             String email = resultSet.getString("email");
             String username = resultSet.getString("username");
             String password = resultSet.getString("password");
-            String userData = String.format("%s-%s-%s-%s-%s", firstname, surname, email, username, password);
+            String userData = String.format("%s+%s+%s+%s+%s", firstname, surname, email, username, password);
             userDataList.add(userData);
         }
         Map<String, Object> responseBody = new HashMap<>();
         responseBody.put("data", userDataList);
         responseBody.put("meta", Collections.singletonMap("count", userDataList.size()));
-        responseBody.put("links", Collections.singletonMap("self", "/users"));
+        responseBody.put("links", Collections.singletonMap("endpoint", "/users"));
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         return ResponseEntity.ok()
@@ -59,8 +60,8 @@ public class userController {
                              .body(responseBody);
     }
 
-    @GetMapping("/users/getName")
-    public ResponseEntity<Map<String, Object>> getUserData(@RequestParam(name = "firstname") String name) throws SQLException {
+    @GetMapping("/users/getSpec")
+    public ResponseEntity<Map<String, Object>> getUserData(@RequestParam(name = "username") String name) throws SQLException {
         ResultSet resultSet = bc.getSpecUser(name);
         List<String> userDataList = new ArrayList<>();
         try{
@@ -69,7 +70,7 @@ public class userController {
             String email = resultSet.getString("email");
             String username = resultSet.getString("username");
             String password = resultSet.getString("password");
-            String userData = String.format("%s-%s-%s-%s-%s", firstname, surname, email, username, password);
+            String userData = String.format("%s+%s+%s+%s+%s", firstname, surname, email, username, password);
             userDataList.add(userData);
         }catch(Exception e)
         {
@@ -88,7 +89,7 @@ public class userController {
     }
 
     @GetMapping("/users/updateUser")
-    public ResponseEntity<Map<String, Object>> updateData(
+    public ResponseEntity<Map<String, Object>> updateUser(
     @RequestParam String old_username,
     @RequestParam String new_username,
     @RequestParam String new_firstname,
@@ -97,8 +98,8 @@ public class userController {
     ) throws SQLException {
         List<String> userDataList = new ArrayList<>();
         try{
-            int success = bc.updateData(old_username, new_username, new_firstname, new_surname, new_password);
-            String userData = String.format("%s-%s", "success", String.valueOf(success));
+            int success = bc.updateUser(old_username, new_username, new_firstname, new_surname, new_password);
+            String userData = String.format("%s+%s", "success", String.valueOf(success));
             userDataList.add(userData);
         }catch(Exception e)
         {

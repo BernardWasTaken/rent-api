@@ -31,10 +31,8 @@ public class baseConnection {
 
             rst = stmt.executeQuery("SELECT * FROM getAllUsers()");
 
-            if(rst.next())
-            {
-                return rst;
-            }
+            
+            return rst;
         }
         catch (Exception ex)
         {
@@ -64,14 +62,50 @@ public class baseConnection {
         return rst;
     }
 
-    public int updateData(String old_username, String new_username, String new_firstname, String new_surname, String new_password)
+    public ResultSet getAllCars()
+    {
+        ResultSet rst = null;
+        try
+        {
+            Statement stmt = conn.createStatement();
+
+            rst = stmt.executeQuery("SELECT * FROM getAllCars()");
+
+            return rst;
+        }
+        catch (Exception ex)
+        {
+            System.out.println(ex.getMessage());
+        }
+        return rst;
+    }
+
+    public ResultSet getSpecCar(int id)
+    {
+        ResultSet rst = null;
+        try
+        {
+            Statement stmt = conn.createStatement();
+
+            rst = stmt.executeQuery("SELECT * FROM getSpecCar("+id+")");
+
+            return rst;
+        }
+        catch (Exception ex)
+        {
+            System.out.println(ex.getMessage());
+        }
+        return rst;
+    }
+
+    public int updateUser(String old_username, String new_username, String new_firstname, String new_surname, String new_password)
         {
             int success = 0;
             try
             {
                 Statement stmt = conn.createStatement();
 
-                success = stmt.executeUpdate("SELECT updateData('"+old_username+"', '"+new_username+"', '"+new_password+"', '"+new_firstname+"', '"+new_surname+"');");
+                success = stmt.executeUpdate("SELECT updateUser('"+old_username+"', '"+new_username+"', '"+new_password+"', '"+new_firstname+"', '"+new_surname+"');");
                 if(success > 0)
                 {
                     return 1;
@@ -83,4 +117,27 @@ public class baseConnection {
             }
             return 0;
         }
+
+
+        public int updateCar(int car_id, String new_name, String new_licenceplate, int new_garage_id, int new_klilometers)
+        {
+            int success = 0;
+            try
+            {
+                Statement stmt = conn.createStatement();
+
+                success = stmt.executeUpdate("SELECT updateCar("+car_id+", '"+new_name+"', '"+new_licenceplate+"', "+new_garage_id+", "+new_klilometers+");");
+                if(success > 0)
+                {
+                    return 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.out.println(ex.getMessage());
+            }
+            return 0;
+        }
+
+    
 }
