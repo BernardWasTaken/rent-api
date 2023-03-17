@@ -179,5 +179,43 @@ public class baseConnection {
             return 0;
         }
 
-    
+        public int insertUser(String new_firstname, String new_surname, String new_birth, int new_city_id, String new_email, String new_username, String new_password)
+        {
+            int success = 0;
+            try
+            {
+                Statement stmt = conn.createStatement();
+
+                success = stmt.executeUpdate("SELECT insertUser('"+new_firstname+"', '"+new_surname+"', '"+new_birth+"', "+new_city_id+", '"+new_email+"', '"+new_username+"', '"+new_password+"');");
+                if(success > 0)
+                {
+                    return 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.out.println(ex.getMessage());
+            }
+            return 0;
+        }
+
+        public int deleteUser(int user_id)
+        {
+            int success = 0;
+            try
+            {
+                Statement stmt = conn.createStatement();
+
+                success = stmt.executeUpdate("SELECT deleteUser("+user_id+");");
+                if(success > 0)
+                {
+                    return 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.out.println(ex.getMessage());
+            }
+            return 0;
+        }
 }
