@@ -69,7 +69,7 @@ public class carController {
 
 
     @GetMapping("/cars/updateCar")
-    public ResponseEntity<Map<String, Object>> updateUser(
+    public ResponseEntity<Map<String, Object>> updateCar(
     @RequestParam int car_id,
     @RequestParam String new_name,
     @RequestParam String new_licenceplate,
@@ -89,6 +89,59 @@ public class carController {
         responseBody.put("data", userDataList);
         responseBody.put("meta", Collections.singletonMap("count", userDataList.size()));
         responseBody.put("links", Collections.singletonMap("endpoint", "/cars/updateCar"));
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return ResponseEntity.ok()
+                             .headers(headers)
+                             .body(responseBody);
+        
+    }
+
+    @GetMapping("/cars/deleteCar")
+    public ResponseEntity<Map<String, Object>> deleteCar(
+    @RequestParam int car_id
+    ) throws SQLException {
+        List<String> userDataList = new ArrayList<>();
+        try{
+            int success = bc.deleteCar(car_id);
+            String userData = String.format("%s+%s", "success", String.valueOf(success));
+            userDataList.add(userData);
+        }catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+        Map<String, Object> responseBody = new HashMap<>();
+        responseBody.put("data", userDataList);
+        responseBody.put("meta", Collections.singletonMap("count", userDataList.size()));
+        responseBody.put("links", Collections.singletonMap("endpoint", "/cars/deleteCar"));
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return ResponseEntity.ok()
+                             .headers(headers)
+                             .body(responseBody);
+        
+    }
+
+    @GetMapping("/cars/insertCar")
+    public ResponseEntity<Map<String, Object>> insertCar(
+    @RequestParam String new_name,
+    @RequestParam String new_licenceplate,
+    @RequestParam int new_garage_id,
+    @RequestParam int new_kilometers
+    ) throws SQLException {
+        List<String> userDataList = new ArrayList<>();
+        try{
+            int success = bc.insertCar(new_name, new_licenceplate, new_garage_id, new_kilometers);
+            String userData = String.format("%s+%s", "success", String.valueOf(success));
+            userDataList.add(userData);
+        }catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+        Map<String, Object> responseBody = new HashMap<>();
+        responseBody.put("data", userDataList);
+        responseBody.put("meta", Collections.singletonMap("count", userDataList.size()));
+        responseBody.put("links", Collections.singletonMap("endpoint", "/cars/insertCar"));
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         return ResponseEntity.ok()

@@ -139,5 +139,45 @@ public class baseConnection {
             return 0;
         }
 
+        public int deleteCar(int car_id)
+        {
+            int success = 0;
+            try
+            {
+                Statement stmt = conn.createStatement();
+
+                success = stmt.executeUpdate("SELECT deleteCar("+car_id+");");
+                if(success > 0)
+                {
+                    return 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.out.println(ex.getMessage());
+            }
+            return 0;
+        }
+
+        public int insertCar(String new_name, String new_licenceplate, int new_garage_id, int new_klilometers)
+        {
+            int success = 0;
+            try
+            {
+                Statement stmt = conn.createStatement();
+
+                success = stmt.executeUpdate("SELECT insertCar('"+new_name+"', '"+new_licenceplate+"', "+new_garage_id+", "+new_klilometers+");");
+                if(success > 0)
+                {
+                    return 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.out.println(ex.getMessage());
+            }
+            return 0;
+        }
+
     
 }
