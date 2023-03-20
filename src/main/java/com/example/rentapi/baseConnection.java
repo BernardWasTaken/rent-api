@@ -218,4 +218,24 @@ public class baseConnection {
             }
             return 0;
         }
+
+        public int resetPassword(String old_username, String new_password)
+        {
+            int success = 0;
+            try
+            {
+                Statement stmt = conn.createStatement();
+
+                success = stmt.executeUpdate("SELECT resetPassword('"+old_username+"', '"+new_password+"');");
+                if(success > 0)
+                {
+                    return 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.out.println(ex.getMessage());
+            }
+            return 0;
+        }
 }
