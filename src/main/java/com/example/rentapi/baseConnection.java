@@ -238,4 +238,101 @@ public class baseConnection {
             }
             return 0;
         }
+
+
+        public ResultSet getAllCities()
+    {
+        ResultSet rst = null;
+        try
+        {
+            Statement stmt = conn.createStatement();
+
+            rst = stmt.executeQuery("SELECT * FROM getAllCities()");
+
+            return rst;
+        }
+        catch (Exception ex)
+        {
+            System.out.println(ex.getMessage());
+        }
+        return rst;
+    }
+
+    public ResultSet getSpecCity(int id)
+    {
+        ResultSet rst = null;
+        try
+        {
+            Statement stmt = conn.createStatement();
+
+            rst = stmt.executeQuery("SELECT * FROM getSpecCity("+id+")");
+
+            return rst;
+        }
+        catch (Exception ex)
+        {
+            System.out.println(ex.getMessage());
+        }
+        return rst;
+    }
+
+    public int updateCity(String old_name, String new_name, int new_post)
+        {
+            int success = 0;
+            try
+            {
+                Statement stmt = conn.createStatement();
+
+                success = stmt.executeUpdate("SELECT updateCity('"+old_name+"', '"+new_name+"', "+new_post+");");
+                if(success > 0)
+                {
+                    return 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.out.println(ex.getMessage());
+            }
+            return 0;
+        }
+
+        public int insertCity(String new_name, int new_post)
+        {
+            int success = 0;
+            try
+            {
+                Statement stmt = conn.createStatement();
+
+                success = stmt.executeUpdate("SELECT insertCity('"+new_name+"', "+new_post+");");
+                if(success > 0)
+                {
+                    return 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.out.println(ex.getMessage());
+            }
+            return 0;
+        }
+
+        public int deleteCity(int city_id)
+        {
+            int success = 0;
+            try
+            {
+                Statement stmt = conn.createStatement();
+
+                success = stmt.executeUpdate("SELECT deleteCity("+city_id+");");
+                if(success > 0)
+                {
+                    return 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.out.println(ex.getMessage());
+            }
+            return 0;
+        }
 }
