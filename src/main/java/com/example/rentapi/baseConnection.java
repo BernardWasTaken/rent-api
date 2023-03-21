@@ -649,4 +649,112 @@ public class baseConnection {
             }
             return 0;
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public ResultSet getAllGarages()
+    {
+        ResultSet rst = null;
+        try
+        {
+            Statement stmt = conn.createStatement();
+
+            rst = stmt.executeQuery("SELECT * FROM getAllGarages()");
+
+            return rst;
+        }
+        catch (Exception ex)
+        {
+            System.out.println(ex.getMessage());
+        }
+        return rst;
+    }
+
+    public ResultSet getSpecGarage(int id)
+    {
+        ResultSet rst = null;
+        try
+        {
+            Statement stmt = conn.createStatement();
+
+            rst = stmt.executeQuery("SELECT * FROM getSpecGarage("+id+")");
+
+            return rst;
+        }
+        catch (Exception ex)
+        {
+            System.out.println(ex.getMessage());
+        }
+        return rst;
+    }
+
+    public int updateGarage(int new_id, String new_name, int new_city_id)
+        {
+            int success = 0;
+            try
+            {
+                Statement stmt = conn.createStatement();
+
+                success = stmt.executeUpdate("SELECT updateGarage("+new_id+", '"+new_name+"', "+new_city_id+");");
+                if(success > 0)
+                {
+                    return 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.out.println(ex.getMessage());
+            }
+            return 0;
+        }
+
+        public int insertGarage(String new_name, int new_city_id)
+        {
+            int success = 0;
+            try
+            {
+                Statement stmt = conn.createStatement();
+
+                success = stmt.executeUpdate("SELECT insertGarage('"+new_name+"', "+new_city_id+");");
+                if(success > 0)
+                {
+                    return 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.out.println(ex.getMessage());
+            }
+            return 0;
+        }
+
+        public int deleteGarage(int garage_id)
+        {
+            int success = 0;
+            try
+            {
+                Statement stmt = conn.createStatement();
+
+                success = stmt.executeUpdate("SELECT deleteGarage("+garage_id+");");
+                if(success > 0)
+                {
+                    return 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.out.println(ex.getMessage());
+            }
+            return 0;
+        }
 }
