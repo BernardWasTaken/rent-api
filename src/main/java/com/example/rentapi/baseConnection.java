@@ -469,4 +469,319 @@ public class baseConnection {
             }
             return 0;
         }
+
+
+
+
+
+
+
+        public ResultSet getAllRents()
+    {
+        ResultSet rst = null;
+        try
+        {
+            Statement stmt = conn.createStatement();
+
+            rst = stmt.executeQuery("SELECT * FROM getAllrents()");
+
+            return rst;
+        }
+        catch (Exception ex)
+        {
+            System.out.println(ex.getMessage());
+        }
+        return rst;
+    }
+
+    public ResultSet getSpecRent(int id)
+    {
+        ResultSet rst = null;
+        try
+        {
+            Statement stmt = conn.createStatement();
+
+            rst = stmt.executeQuery("SELECT * FROM getSpecRent("+id+")");
+
+            return rst;
+        }
+        catch (Exception ex)
+        {
+            System.out.println(ex.getMessage());
+        }
+        return rst;
+    }
+
+    public int updateRent(int new_id, int new_user_id, int new_car_id, String new_fromdate, String new_todate, int new_completed)
+        {
+            int success = 0;
+            try
+            {
+                Statement stmt = conn.createStatement();
+
+                success = stmt.executeUpdate("SELECT updateRent("+new_id+", "+new_user_id+", "+new_car_id+", '"+new_fromdate+"', '"+new_todate+"', "+new_completed+");");
+                if(success > 0)
+                {
+                    return 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.out.println(ex.getMessage());
+            }
+            return 0;
+        }
+
+        public int insertRent(int new_user_id, int new_car_id, String new_fromdate, String new_todate)
+        {
+            int success = 0;
+            try
+            {
+                Statement stmt = conn.createStatement();
+
+                success = stmt.executeUpdate("SELECT insertRent("+new_user_id+", "+new_car_id+", '"+new_fromdate+"', '"+new_todate+"');");
+                if(success > 0)
+                {
+                    return 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.out.println(ex.getMessage());
+            }
+            return 0;
+        }
+
+        public int deleteRent(int rent_id)
+        {
+            int success = 0;
+            try
+            {
+                Statement stmt = conn.createStatement();
+
+                success = stmt.executeUpdate("SELECT deleteRent("+rent_id+");");
+                if(success > 0)
+                {
+                    return 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.out.println(ex.getMessage());
+            }
+            return 0;
+        }
+
+
+
+
+
+
+
+
+
+
+        public ResultSet getAllLogs()
+    {
+        ResultSet rst = null;
+        try
+        {
+            Statement stmt = conn.createStatement();
+
+            rst = stmt.executeQuery("SELECT * FROM getAllLogs()");
+
+            return rst;
+        }
+        catch (Exception ex)
+        {
+            System.out.println(ex.getMessage());
+        }
+        return rst;
+    }
+
+    public ResultSet getSpecLog(int id)
+    {
+        ResultSet rst = null;
+        try
+        {
+            Statement stmt = conn.createStatement();
+
+            rst = stmt.executeQuery("SELECT * FROM getSpecLog("+id+")");
+
+            return rst;
+        }
+        catch (Exception ex)
+        {
+            System.out.println(ex.getMessage());
+        }
+        return rst;
+    }
+
+    public int updateLog(int new_id, String new_logdescription, int new_logtype)
+        {
+            int success = 0;
+            try
+            {
+                Statement stmt = conn.createStatement();
+
+                success = stmt.executeUpdate("SELECT updateLog("+new_id+", '"+new_logdescription+"', "+new_logtype+");");
+                if(success > 0)
+                {
+                    return 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.out.println(ex.getMessage());
+            }
+            return 0;
+        }
+
+        public int insertLog(String new_logdescription, int new_logtype)
+        {
+            int success = 0;
+            try
+            {
+                Statement stmt = conn.createStatement();
+
+                success = stmt.executeUpdate("SELECT insertLog('"+new_logdescription+"', "+new_logtype+");");
+                if(success > 0)
+                {
+                    return 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.out.println(ex.getMessage());
+            }
+            return 0;
+        }
+
+        public int deleteLog(int log_id)
+        {
+            int success = 0;
+            try
+            {
+                Statement stmt = conn.createStatement();
+
+                success = stmt.executeUpdate("SELECT deleteLog("+log_id+");");
+                if(success > 0)
+                {
+                    return 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.out.println(ex.getMessage());
+            }
+            return 0;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public ResultSet getAllGarages()
+    {
+        ResultSet rst = null;
+        try
+        {
+            Statement stmt = conn.createStatement();
+
+            rst = stmt.executeQuery("SELECT * FROM getAllGarages()");
+
+            return rst;
+        }
+        catch (Exception ex)
+        {
+            System.out.println(ex.getMessage());
+        }
+        return rst;
+    }
+
+    public ResultSet getSpecGarage(int id)
+    {
+        ResultSet rst = null;
+        try
+        {
+            Statement stmt = conn.createStatement();
+
+            rst = stmt.executeQuery("SELECT * FROM getSpecGarage("+id+")");
+
+            return rst;
+        }
+        catch (Exception ex)
+        {
+            System.out.println(ex.getMessage());
+        }
+        return rst;
+    }
+
+    public int updateGarage(int new_id, String new_name, int new_city_id)
+        {
+            int success = 0;
+            try
+            {
+                Statement stmt = conn.createStatement();
+
+                success = stmt.executeUpdate("SELECT updateGarage("+new_id+", '"+new_name+"', "+new_city_id+");");
+                if(success > 0)
+                {
+                    return 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.out.println(ex.getMessage());
+            }
+            return 0;
+        }
+
+        public int insertGarage(String new_name, int new_city_id)
+        {
+            int success = 0;
+            try
+            {
+                Statement stmt = conn.createStatement();
+
+                success = stmt.executeUpdate("SELECT insertGarage('"+new_name+"', "+new_city_id+");");
+                if(success > 0)
+                {
+                    return 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.out.println(ex.getMessage());
+            }
+            return 0;
+        }
+
+        public int deleteGarage(int garage_id)
+        {
+            int success = 0;
+            try
+            {
+                Statement stmt = conn.createStatement();
+
+                success = stmt.executeUpdate("SELECT deleteGarage("+garage_id+");");
+                if(success > 0)
+                {
+                    return 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.out.println(ex.getMessage());
+            }
+            return 0;
+        }
 }
