@@ -180,4 +180,26 @@ public class userController {
             headers.setContentType(MediaType.APPLICATION_JSON);
             return ResponseEntity.ok().headers(headers).body(responseBody);
         }
+
+    @GetMapping("/users/checkLogin")
+    public ResponseEntity<Map<String, Object>> checkLogin(
+        @RequestParam String username,
+        @RequestParam String password
+        ) throws SQLException {
+            List<String> userDataList = new ArrayList<>();
+            try {
+                int success = bc.checkLogin(username, password);
+                String userData = String.format("%s+%s", "success", String.valueOf(success));
+                userDataList.add(userData);
+            } catch (Exception e) {
+                // TODO: handle exception
+            }
+            Map<String, Object> responseBody = new HashMap<>();
+            responseBody.put("data", userDataList);
+            responseBody.put("meta", Collections.singletonMap("count", userDataList.size()));
+            responseBody.put("links", Collections.singletonMap("endpoint", "/users/checkLogin"));
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            return ResponseEntity.ok().headers(headers).body(responseBody);
+        }
 }

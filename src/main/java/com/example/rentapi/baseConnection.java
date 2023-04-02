@@ -1,5 +1,6 @@
 package com.example.rentapi;
 
+import java.io.Console;
 import java.sql.*;
 import org.json.*;
 
@@ -363,6 +364,32 @@ public class baseConnection {
             System.out.println(ex.getMessage());
         }
         return rst;
+    }
+
+    public int checkLogin(String username, String password) {
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rst = stmt.executeQuery("SELECT * FROM checkLogin('"+username+"', '"+password+"')");
+    
+            if(rst.next()) {
+                int checklogin = rst.getInt("checklogin");
+                System.out.println(checklogin);
+                if(checklogin > 0) {
+                    System.out.println("vrnjen 1");
+                    return 1;
+                } else {
+                    System.out.println("vrnjen 0 v else");
+                    return 0;
+                }
+            }
+            else{
+                System.out.println("prazn next");
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        System.out.println("vrnjen 0");
+        return 0;
     }
 
     public ResultSet getSpecConfirmedRent(int id)
