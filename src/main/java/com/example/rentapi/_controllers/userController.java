@@ -25,12 +25,13 @@ public class userController {
         ResultSet resultSet = bc.getAllUsers();
         List<String> userDataList = new ArrayList<>();
         while(resultSet.next()) {
+            int id = resultSet.getInt("id");
             String firstname = resultSet.getString("firstname");
             String surname = resultSet.getString("surname");
             String email = resultSet.getString("email");
             String username = resultSet.getString("username");
             String password = resultSet.getString("password");
-            String userData = String.format("%s+%s+%s+%s+%s", firstname, surname, email, username, password);
+            String userData = String.format("%s+%s+%s+%s+%s+%s", String.valueOf(id), firstname, surname, email, username, password);
             userDataList.add(userData);
         }
         Map<String, Object> responseBody = new HashMap<>();

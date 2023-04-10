@@ -26,11 +26,12 @@ public class carController {
         ResultSet resultSet = bc.getAllCars();
         List<String> userDataList = new ArrayList<>();
         while(resultSet.next()) {
+            int id = resultSet.getInt("id");
             String name = resultSet.getString("name");
             String licenceplate = resultSet.getString("licenceplate");
             int garage_id = resultSet.getInt("garage_id");
             int kilometers = resultSet.getInt("kilometers");
-            String userData = String.format("%s+%s+%s+%s", name, licenceplate, String.valueOf(garage_id), String.valueOf(kilometers));
+            String userData = String.format("%s+%s+%s+%s+%s", String.valueOf(id), name, licenceplate, String.valueOf(garage_id), String.valueOf(kilometers));
             userDataList.add(userData);
         }
         Map<String, Object> responseBody = new HashMap<>();
